@@ -1,4 +1,5 @@
 ﻿using System;
+using LAB07_COLLECTIONS.Classes;
 
 namespace LAB07_COLLECTIONS
 {
