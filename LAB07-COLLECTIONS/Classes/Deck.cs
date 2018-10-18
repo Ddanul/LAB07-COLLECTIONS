@@ -5,43 +5,48 @@ using System.Text;
 
 namespace LAB07_COLLECTIONS.Classes
 {
-    class Deck<T> : IEnumerable
+    public class Deck<T> : IEnumerable
     {
 
-        T[] cards = new T[5];
+        public T[] cards = new T[5];
         int count = 0;
 
         public void Add(T card)
         {
-            if(count == cards.Length)
+            if (count == cards.Length)
             {
                 Array.Resize(ref cards, cards.Length * 2);
             }
             cards[count++] = card;
         }
 
-        public void Remove(T card)
+        public bool Remove(T card)
         {
-            for(int i = 0; i< cards.Length; i++)
+            for (int i = 0; i < count; i++)
             {
                 if (cards[i].Equals(card))
                 {
-                    cards[i] = cards[i + 1];
-                    cards[i + 1] = cards[cards.Length - 1];
+                    for (int j = i; j < cards.Length-1; j++)
+                    {
+                        cards[j] = cards[j + 1];
+                    }
                     count--;
+                    Console.WriteLine();
+                    Console.WriteLine($"The card was removed.");
+                    return true;
                 }
             }
-            Console.WriteLine("Card not in deck.");
+            return false;
+            
         }
 
-
-
-        public List<T> ReturnSuit(string suit)
+        public List<Card> ReturnSuit(Suit suit)
         {
-            List<T> returnedCards = new List<T>();
-            
-            foreach(T card in cards)
+            List<Card> returnedCards = new List<Card>();
+
+            for (int i = 0; i < count; i++)
             {
+                Card card = (Card)Convert.ChangeType(cards[i], typeof(Card));
                 if (card.Suit == suit)
                 {
                     returnedCards.Add(card);
@@ -52,7 +57,7 @@ namespace LAB07_COLLECTIONS.Classes
 
         public IEnumerator<T> GetEnumerator()
         {
-            for (int i=0; i< count; i++)
+            for (int i = 0; i < count; i++)
             {
                 yield return cards[i];
             }
