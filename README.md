@@ -1,4 +1,4 @@
-# LAB04-TICTACTOE
+# LAB07 - Collections
 This project holds a collection of Card classes inside of a Deck class built in C# on a .NET console app. The purpose is to demonstrate the use of generic collections and how the implementatino of IEnumerable and IEnumeration are used.
 
 ## Visual
